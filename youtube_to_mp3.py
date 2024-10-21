@@ -101,30 +101,96 @@ class YouTubeToMP3(QWidget):
 
     def initUI(self):
         layout = QVBoxLayout()
+        layout.setSpacing(20)
+        layout.setContentsMargins(30, 30, 30, 30)
 
+        # URL input
         url_layout = QHBoxLayout()
         self.url_input = QLineEdit()
         self.url_input.setPlaceholderText("Enter YouTube URL (video or playlist)")
+        self.url_input.setStyleSheet("""
+            QLineEdit {
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                padding: 8px;
+                font-size: 14px;
+            }
+            QLineEdit:focus {
+                border-color: #3498db;
+            }
+        """)
         url_layout.addWidget(self.url_input)
 
         self.download_btn = QPushButton("Download")
+        self.download_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 10px;
+                font-size: 14px;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+            QPushButton:pressed {
+                background-color: #21618c;
+            }
+        """)
         self.download_btn.clicked.connect(self.start_download)
         url_layout.addWidget(self.download_btn)
 
         layout.addLayout(url_layout)
 
+        # Playlist checkbox
         self.playlist_checkbox = QCheckBox("Download as playlist")
+        self.playlist_checkbox.setStyleSheet("""
+            QCheckBox {
+                font-size: 14px;
+            }
+            QCheckBox::indicator {
+                width: 18px;
+                height: 18px;
+            }
+        """)
         layout.addWidget(self.playlist_checkbox)
 
+        # Progress bar
         self.progress_bar = QProgressBar()
+        self.progress_bar.setStyleSheet("""
+            QProgressBar {
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                text-align: center;
+                height: 25px;
+            }
+            QProgressBar::chunk {
+                background-color: #3498db;
+                border-radius: 8px;
+            }
+        """)
         layout.addWidget(self.progress_bar)
 
+        # Status label
         self.status_label = QLabel("Ready")
+        self.status_label.setStyleSheet("""
+            QLabel {
+                font-size: 14px;
+                color: #555;
+            }
+        """)
         layout.addWidget(self.status_label)
 
         self.setLayout(layout)
         self.setWindowTitle('YouTube to MP3 Downloader')
-        self.setGeometry(300, 300, 400, 150)
+        self.setGeometry(300, 300, 500, 200)
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #f5f5f5;
+                font-family: Arial, sans-serif;
+            }
+        """)
 
     def start_download(self):
         url = self.url_input.text()

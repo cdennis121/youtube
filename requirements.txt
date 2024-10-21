@@ -4,6 +4,6 @@ pydub
 PyQt6
 pyinstaller
 ytmusicapi
-
+QtWidgets
 
 
